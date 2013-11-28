@@ -1,4 +1,4 @@
-spree_market
+Spree Market
 ============
 
-spree_market
+This extension is ment to be a free platform like Ebay.com or Mercadolibre.com based on Spree

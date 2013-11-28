@@ -51,34 +51,10 @@
   <% end %>
 
   <h3><%= Spree.t(:my_products) %></h3>
-  <% if @products %>
-      <table class="order-summary">
-        <thead>
-        <tr>
-          <th class="product-image"><%= Spree.t(:image) %></th>
-          <th class="product-name"><%= Spree.t(:name) %></th>
-          <th class="product-description"><%= Spree.t(:description) %></th>
-          <th class="product-buy"><%#= Spree.t(:shipment_state) %></th>
-        </tr>
-        </thead>
-        <tbody>
-        <% @products.each do |product| %>
-            <tr class="<%= cycle('even', 'odd') %>">
-              <td class="product-image"><%#= product_image(product, :itemprop => "image") %></td>
-              <td class="product-name"><%= link_to product.name, product %></td>
-              <td class="product-description"><%= product.description %></td>
-              <% if spree_current_user %>
-                <td class="product-buy"><%=link_to "Edit", "/admin/products/#{product.permalink}/edit"  %></td>
-              <% else %>
-                <td class="product-buy"><%= render :partial => 'spree/products/cart_form', :locals =>{:product => product}%></td>
-              <% end %>
 
-            </tr>
-        <% end %>
-        </tbody>
-      </table>
-  <% else %>
-      <p><%= Spree.t(:you_have_no_products) %></p>
-  <% end %>
+  <%=link_to t(:available_products) , root_path%> <%= @available_products  %>  </br>
+  <%=link_to t(:stopped_products ) , root_path%>  <%= @stopped_products %>     </br>
+  <%=link_to t(:finished_products ) , root_path%> <%= @finished_products %>    </br>
+
 
 </div>
