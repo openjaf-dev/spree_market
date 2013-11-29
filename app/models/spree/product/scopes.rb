@@ -216,7 +216,7 @@ module Spree
     search_scopes << :stopped
 
     def self.active(currency = nil)
-      not_deleted.available(nil, currency)
+      not_deleted.available(nil, nil, currency)
     end
     search_scopes << :active
 

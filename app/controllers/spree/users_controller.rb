@@ -11,6 +11,8 @@ class Spree::UsersController < Spree::StoreController
     @stopped_products   = @user.products.stopped.uniq.count
     @finished_products  = @user.products.finished.uniq.count
     @available_products = @user.products.available.uniq.count
+    @questions_to_user  = @user.questions.order(created_at: :asc )
+    @products = @user.products
   end
 
   def create

@@ -48,13 +48,36 @@
         <p><%= Spree.t(:you_have_no_orders_yet) %></p>
       <% end %>
       <br />
+
+
+    <h3><%= Spree.t(:my_products) %></h3>
+      <%=link_to t(:available_products), root_path%> <%= @available_products  %>  </br>
+      <%=link_to t(:stopped_products ), root_path%>  <%= @stopped_products %>     </br>
+      <%=link_to t(:finished_products ), root_path%> <%= @finished_products %>    </br>
+    <br />
+
+    <h3><%= Spree.t(:questions) %></h3>
+      <ul class="inline">
+        <% if @questions_to_user.present? %>
+          <% @questions_to_user.each do |q| %>
+          <li>
+            <span class="columns three alpha omega">
+              <%=Spree.t(:date)%> :<%= q.created_at.strftime("%d/%m/%Y")%> </br>
+              <%=Spree.t(:about)%> <%= link_to q.product.name, q.product%> :
+            </span>
+            <span class="columns twelve omega">
+              <%= q.question  %>
+            </span>
+          </li>
+          <% end %>
+        <% end %>
+      </ul>
+
+
   <% end %>
+</div>
 
-  <h3><%= Spree.t(:my_products) %></h3>
-
-  <%=link_to t(:available_products) , root_path%> <%= @available_products  %>  </br>
-  <%=link_to t(:stopped_products ) , root_path%>  <%= @stopped_products %>     </br>
-  <%=link_to t(:finished_products ) , root_path%> <%= @finished_products %>    </br>
-
-
+<div data-hook="user_products">
+  <h3><%= Spree.t(:products) %></h3>
+  <%= render :partial => 'spree/shared/products', :locals => { :products => @products } %>
 </div>

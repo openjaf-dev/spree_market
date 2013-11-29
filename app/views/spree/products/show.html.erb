@@ -44,11 +44,36 @@
       <%= render :partial => 'taxons' %>
 
       <div>
-        Product Owner: <%= link_to @product.user.email, "/spree/users/#{@product.user.id}"%>  </br>
+        Product Owner: <%= link_to @product.user.email, "/users/#{@product.user.id}"%>  </br>
         Owner Rating: <%#= @product.user.ratings.first.rating %>
       </div>
 
     </div>
   </div>
+
+  <div class="columns sixteen alpha omega" data-hook="product_questions_part">
+    <h6 class="product-section-title"><%= Spree.t(:questions_anwsers) %></h6>
+    <div>
+      <% if !@product.questions.empty? %>
+       <ul>
+         <% @product.questions.each do |q| %>
+           <li><%= q.question %></li>
+         <% end %>
+       </ul>
+      <% else %>
+        <%= Spree.t(:no_question_to_this_product) %>
+      <% end %>
+    </div>
+    <% if spree_current_user %>
+      <div>
+        <%= form_for [@product, Spree::Question.new], url: product_questions_path(@product) do |q|  %>
+          <%= q.text_area :question, class:"columns sixteen alpha omega" %>
+          <%= q.submit Spree.t(:ask), class:"columns alpha omega"%>
+        <% end %>
+      </div>
+    <% end %>
+</div>
+
+
 
 </div>

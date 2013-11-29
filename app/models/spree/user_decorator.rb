@@ -2,6 +2,7 @@ Spree::User.class_eval do
 
   has_many :ratings
   has_many :products
+  has_many :questions
 
 
   before_create :set_role,

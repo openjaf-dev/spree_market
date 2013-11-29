@@ -24,4 +24,8 @@ en:
   spree:
     sell_finish_at: "Finish at"
     sell_stop: "Stop sell now?"
+    questions: "Questions to me"
+    no_question_to_this_product: "No questions jet"
+    ask: "Ask"
+    questions_anwsers: "Questions and Anwsers"
 

@@ -8,6 +8,10 @@ Spree::Core::Engine.routes.draw do
 
     resources :users
 
+    resources :products do
+      resources :questions
+    end
+
     namespace :admin do
       resources :products do
         collection do

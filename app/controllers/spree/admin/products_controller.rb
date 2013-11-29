@@ -18,6 +18,63 @@ module Spree
         respond_with(@collection)
       end
 
+      #finished_admin_products_parth
+      def finished
+        return @collection if @collection.present?
+        params[:q] ||= {}
+        params[:q][:deleted_at_null] ||= "1"
+        params[:q][:sell_stop_false] ||= "1"
+        params[:q][:sell_finish_at_lteq] ||= Time.now
+        #TODO aqui me falta poner que no est'e finalizado
+
+        params[:q][:s] ||= "name asc"
+        @collection = super
+        @collection = @collection.with_deleted if params[:q].delete(:deleted_at_null).blank?
+        # @search needs to be defined as this is passed to search_form_for
+        @search = @collection.ransack(params[:q])
+        @collection = @search.result.
+            group_by_products_id.
+            includes(product_includes).
+            page(params[:page]).
+            per(Spree::Config[:admin_products_per_page])
+
+        if params[:q][:s].include?("master_default_price_amount")
+          # PostgreSQL compatibility
+          @collection = @collection.group("spree_prices.amount")
+        end
+        respond_with(@collection)
+
+
+      end
+
+      #sell_stop_admin_products_path
+      def sell_stop
+        return @collection if @collection.present?
+        params[:q] ||= {}
+        params[:q][:deleted_at_null] ||= "1"
+        params[:q][:sell_stop_true] ||= "1"
+        #TODO aqui me falta poner que no est'e finalizado
+
+        params[:q][:s] ||= "name asc"
+        @collection = super
+        @collection = @collection.with_deleted if params[:q].delete(:deleted_at_null).blank?
+        # @search needs to be defined as this is passed to search_form_for
+        @search = @collection.ransack(params[:q])
+        @collection = @search.result.
+            group_by_products_id.
+            includes(product_includes).
+            page(params[:page]).
+            per(Spree::Config[:admin_products_per_page])
+
+        if params[:q][:s].include?("master_default_price_amount")
+          # PostgreSQL compatibility
+          @collection = @collection.group("spree_prices.amount")
+        end
+        respond_with(@collection)
+
+
+      end
+
       def update
         if params[:product][:taxon_ids].present?
           params[:product][:taxon_ids] = params[:product][:taxon_ids].split(',')
@@ -83,6 +140,8 @@ module Spree
           return @collection if @collection.present?
           params[:q] ||= {}
           params[:q][:deleted_at_null] ||= "1"
+          params[:q][:sell_stop_false] ||= "1"
+          params[:q][:sell_finish_at_gteq] ||= Time.now
 
           params[:q][:s] ||= "name asc"
           @collection = super
