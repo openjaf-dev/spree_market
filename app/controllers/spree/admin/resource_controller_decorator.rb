@@ -5,5 +5,8 @@ Spree::Admin::ResourceController.class_eval do
     params.require(object_name).permit!
   end
 
+  def collection_actions
+    [:index, :sell_stop, :finished]
+  end
 
 end

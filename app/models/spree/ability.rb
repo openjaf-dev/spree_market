@@ -51,15 +51,15 @@ module Spree
           order.user == user || order.token && token == order.token
         end
 
-        #TODO, see why i can't do new and create if i :manage
         can :manage, Product, user_id: user.id
         can [:sell_stop, :finished], Product, user_id: user.id
         can [:new, :create], Product
 
+        can :manage, Question, user_id: user.id
+
         can :manage, Variant
         can :manage, ProductProperty
         can :manage, Image
-
 
         can [:index, :read], Property
         can :create, Spree.user_class

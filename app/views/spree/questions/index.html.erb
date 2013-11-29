@@ -1,0 +1,31 @@
+<h1>Listing spree_questions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Product</th>
+      <th>Question</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @spree_questions.each do |spree_question| %>
+      <tr>
+        <td><%= spree_question.user_id %></td>
+        <td><%= spree_question.product_id %></td>
+        <td><%= spree_question.question %></td>
+        <td><%= link_to 'Show', spree_question %></td>
+        <td><%= link_to 'Edit', edit_spree_question_path(spree_question) %></td>
+        <td><%= link_to 'Destroy', spree_question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Question', new_spree_question_path %>

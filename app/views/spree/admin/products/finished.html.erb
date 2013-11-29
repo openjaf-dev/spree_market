@@ -55,9 +55,9 @@
 
 <div id="new_product_wrapper" data-hook></div>
 
-<%= paginate @collection %>
+<%= paginate @finished %>
 
-<% if @collection.any? %>
+<% if @finished.any? %>
   <table class="index" id="listing_products">
     <colgroup>
        <col style="width: 15%;">
@@ -75,7 +75,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @collection.each do |product| %>
+      <% @finished.each do |product| %>
           <tr <%== "style='color: red;'" if product.deleted? %> id="<%= spree_dom_id product %>" data-hook="admin_products_index_rows" class="<%= cycle('odd', 'even') %>">
             <td class="align-center"><%= product.sku rescue '' %></td>
             <td class="align-center"><%= mini_image(product) %></td>
@@ -99,4 +99,4 @@
   </div>
 <% end %>
 
-<%= paginate @collection %>
+<%= paginate @finished %>

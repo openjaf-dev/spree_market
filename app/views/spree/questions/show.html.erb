@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @spree_question.user_id %>
+</p>
+
+<p>
+  <strong>Product:</strong>
+  <%= @spree_question.product_id %>
+</p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @spree_question.question %>
+</p>
+
+<%= link_to 'Edit', edit_spree_question_path(@spree_question) %> |
+<%= link_to 'Back', spree_questions_path %>

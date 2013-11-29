@@ -51,9 +51,9 @@
 
 
     <h3><%= Spree.t(:my_products) %></h3>
-      <%=link_to t(:available_products), root_path%> <%= @available_products  %>  </br>
-      <%=link_to t(:stopped_products ), root_path%>  <%= @stopped_products %>     </br>
-      <%=link_to t(:finished_products ), root_path%> <%= @finished_products %>    </br>
+      <%=link_to t(:available_products), admin_products_path%> <%= @available_products  %>  </br>
+      <%=link_to t(:stopped_products ), sell_stop_admin_products_path%>  <%= @stopped_products %>     </br>
+      <%=link_to t(:finished_products ), finished_admin_products_path%> <%= @finished_products %>    </br>
     <br />
 
     <h3><%= Spree.t(:questions) %></h3>
