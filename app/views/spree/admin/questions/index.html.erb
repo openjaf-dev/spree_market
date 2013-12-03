@@ -1,0 +1,58 @@
+<% content_for :page_title do %>
+    <%= Spree.t(:listing_questions) %>
+<% end %>
+
+<%# content_for :page_actions do %>
+    <!--<li id="new_product_link">-->
+      <%#= button_link_to Spree.t(:new_product), new_object_url, { :remote => true, :icon => 'icon-plus', :id => 'admin_new_product' } %>
+    <!--</li>-->
+<%# end if can?(:create, Spree::Product) %>
+
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+
+<div id="new_product_wrapper" data-hook></div>
+
+<%= paginate @questions %>
+
+<% if @questions.any? %>
+    <table class="index" id="listing_products">
+      <colgroup>
+        <col style="width: 15%;">
+        <col style="width: 10%;">
+        <col style="width: 48%;">
+        <col style="width: 10%;">
+        <col style="width: 17%;">
+      </colgroup>
+      <thead>
+      <tr data-hook="admin_products_index_headers">
+        <th><%= Spree.t(:user) %></th>
+        <th><%= Spree.t(:product) %><%#= sort_link @search,:product_id, Spree.t(:name), { :default_order => "desc" }, {:title => 'admin_products_listing_name_title'} %></th>
+        <th><%= Spree.t(:question) %><%#= sort_link @search, :question, Spree.t(:user),{ :default_order => "desc" }, {:title => 'admin_products_listing_user_title'}  %></th>
+        <th data-hook="admin_products_index_header_actions" class="actions"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @questions.each do |question| %>
+          <tr <%#== "style='color: red;'" if product.deleted? %> id="<%#= spree_dom_id product %>" data-hook="admin_products_index_rows" class="<%= cycle('odd', 'even') %>">
+            <td class="align-center"><%= question.user.email %></td>
+            <td class="align-center"><%= question.product.name %></td>
+            <td><%= question.question  %></td>
+            <td class="actions" data-hook="admin_products_index_row_actions">
+              <%= link_to_edit question, :no_text => true, :class => 'edit' if can?(:edit, question) %>
+              &nbsp;
+              <%= link_to_awnser question, :no_text => true, :class => 'clone' if can?(:awnser, question) %>
+              &nbsp;
+              <%= link_to_delete question, :no_text => true if can?(:delete, question)  %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% else %>
+    <div class="alpha twelve columns no-objects-found">
+      <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/product')) %>,
+      <%= link_to Spree.t(:add_one), spree.new_admin_product_path %>!
+    </div>
+<% end %>
+
+<%= paginate @questions %>

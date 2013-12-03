@@ -12,6 +12,6 @@
   <%= tab(:promotions, :url => spree.admin_promotions_path, :icon => 'icon-bullhorn') %>
 <% end %>
 <!-- TODO this is the menu for de questions in the admin interface-->
-<%# if can? :admin, Spree::Question %>
-    <%#= tab(:questions, :icon => 'icon-bullhorn') %>
-<%# end %>
+<% if can? :admin, Spree::Question %>
+    <%= tab(:questions, :icon => 'icon-bullhorn') %>
+<% end %>

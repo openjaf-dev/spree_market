@@ -72,6 +72,7 @@ module Spree
         can [:index, :read], Taxonomy
         can [:index, :read], Zone
       else
+        can :read, Question
         can [:index, :read], Country
         can [:index, :read], OptionType
         can [:index, :read], OptionValue

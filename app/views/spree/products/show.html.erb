@@ -44,8 +44,8 @@
       <%= render :partial => 'taxons' %>
 
       <div>
-        Product Owner: <%= link_to @product.user.email, "/users/#{@product.user.id}"%>  </br>
-        Owner Rating: <%#= @product.user.ratings.first.rating %>
+        <%= Spree.t(:seller) %> <%= link_to @product.user.email, "/users/#{@product.user.id}"%>  </br>
+        <%= Spree.t(:ratting) %> <%#= @product.user.ratings.first.rating %>
       </div>
 
     </div>

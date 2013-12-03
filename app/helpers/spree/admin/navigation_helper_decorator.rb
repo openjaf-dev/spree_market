@@ -4,8 +4,9 @@ Spree::Admin::NavigationHelper.class_eval do
         options = {:label => args.first.to_s}
 
         # Return if resource is found and user is not allowed to :admin
-        return '' if klass = klass_for(options[:label]) and cannot?(:admin, klass)
 
+        return '' if klass = klass_for(options[:label]) and cannot?(:admin, klass)
+        debugger
         if args.last.is_a?(Hash)
           options = options.merge(args.pop)
         end
@@ -22,7 +23,6 @@ Spree::Admin::NavigationHelper.class_eval do
         else
           link = link_to(titleized_label, destination_url)
         end
-        # TODO the end_with? is not working, maybe is not taking the decorator.
         selected = if options[:match_path]
           request.fullpath.end_with?("#{admin_path}#{options[:match_path]}")
         else
@@ -34,6 +34,12 @@ Spree::Admin::NavigationHelper.class_eval do
           css_classes << options[:css_class]
         end
         content_tag('li', link, :class => css_classes.join(' '))
+      end
+
+      def link_to_awnser(resource, options={})
+        # TODO aqui hay que poner el enlace a la acci'on responder del controlador de question
+        options[:data] = {:action => 'awnser'}
+        link_to_with_icon('icon-copy', Spree.t(:awnser), root_path, options)
       end
 
 end
