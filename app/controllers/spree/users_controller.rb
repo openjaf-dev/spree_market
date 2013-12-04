@@ -8,9 +8,15 @@ class Spree::UsersController < Spree::StoreController
 
   def show
     @orders = @user.orders.complete.order('completed_at desc')
-    @stopped_products   = @user.products.stopped.uniq.count
-    @finished_products  = @user.products.finished.uniq.count
-    @available_products = @user.products.available.uniq.count
+    if spree_current_user.admin?
+      @stopped_products   = Spree::Product.stopped.uniq.count
+      @finished_products  = Spree::Product.finished.uniq.count
+      @available_products = Spree::Product.available.uniq.count
+    else
+      @stopped_products   = @user.products.stopped.uniq.count
+      @finished_products  = @user.products.finished.uniq.count
+      @available_products = @user.products.available.uniq.count
+    end
     @questions_to_user  = @user.questions.order(created_at: :asc)
     @products = @user.products
   end

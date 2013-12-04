@@ -1,20 +1,14 @@
 module Spree
-  module Admin
-    class QuestionsController < ResourceController
+    class QuestionsController < Spree::StoreController
       before_action :set_question, only: [:show, :edit, :update, :destroy]
 
       # GET /spree/questions
       # GET /spree/questions.json
       def index
-
-        #Spree::Question.joins(:user).where(user_id: a.id)
-
+        return @questions if @questions.present?
         params[:q] ||= {}
-        if !spree_current_user.admin?
-          params[:q][:user_email_cont] ||= spree_current_user.email
-        end
 
-        params[:q][:s] ||= "created_at asc"
+        params[:q][:s] ||= "name asc"
         #@questions = @questions.with_deleted if params[:q].delete(:deleted_at_null).blank?
         #@search needs to be defined as this is passed to search_form_for
         @search = Spree::Question.ransack(params[:q])
@@ -24,10 +18,10 @@ module Spree
             page(params[:page]).
             per(Spree::Config[:admin_products_per_page])
 
-        #if params[:q][:s].include?("master_default_price_amount")
-        #  # PostgreSQL compatibility
-        #  @questions = @questions.group("spree_prices.amount")
-        #end
+        if params[:q][:s].include?("master_default_price_amount")
+          # PostgreSQL compatibility
+          @questions = @questions.group("spree_prices.amount")
+        end
         @questions
       end
 
@@ -88,10 +82,6 @@ module Spree
         end
       end
 
-      def awnser
-      #TODO here goes the action to awnser each question
-      end
-
       private
         # Use callbacks to share common setup or constraints between actions.
         def set_question
@@ -103,5 +93,4 @@ module Spree
           params.require(:question).permit(:question)
         end
     end
-  end
 end

@@ -1,7 +1,6 @@
 <% content_for :sub_menu do %>
   <ul id="sub_nav" data-hook="admin_product_sub_tabs" class="inline-menu">
     <%= tab :products, :label => "available", :match_path => '/products' %>
-    <!--TODO does not take the translations the labels-->
     <%= tab 'admin_sell_stop', :label => "sell_stop", :route => :sell_stop_admin_products, :match_path => '/products/sell_stop'%>
     <%= tab 'admin_finished', :label => "finished", :route => :finished_admin_products, :match_path => '/products/finished' %>
     <%= tab :option_types, :match_path => '/option_types' %>

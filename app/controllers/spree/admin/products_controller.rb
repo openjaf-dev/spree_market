@@ -25,7 +25,9 @@ module Spree
         params[:q][:deleted_at_null] ||= "1"
         params[:q][:sell_stop_false] ||= "1"
         params[:q][:sell_finish_at_lteq] ||= Time.now
-        params[:q][:user_id_eq] ||= spree_current_user.id
+        if !spree_current_user.admin?
+          params[:q][:user_id_eq] ||= spree_current_user.id
+        end
         params[:q][:s] ||= "name asc"
 
         @search = Product.ransack(params[:q])
@@ -48,7 +50,9 @@ module Spree
         params[:q] = {}
         params[:q][:deleted_at_null] ||= "1"
         params[:q][:sell_stop_true] ||= "1"
-        params[:q][:user_id_eq] ||= spree_current_user.id
+        if !spree_current_user.admin?
+          params[:q][:user_id_eq] ||= spree_current_user.id
+        end
         params[:q][:s] ||= "name asc"
 
         @search = Spree::Product.ransack(params[:q])

@@ -84,9 +84,9 @@
             <td class="align-center"><%= product.sku rescue '' %></td>
             <td class="align-center"><%= mini_image(product) %></td>
             <td><%= link_to product.try(:name), edit_admin_product_path(product) %></td>
-            <!-- TODO esto solo se muestra si eres el admin-->
             <% if spree_current_user.admin? %>
-              <td><%= link_to product.user.email, user_path(product.user) %></td>
+                <!-- TODO esto solo se muestra si eres el admin-->
+                <td><%= link_to product.user.email, user_path(product.user) %></td>
             <% end %>
             <td class="align-center"><%= product.display_price.to_html rescue '' %></td>
             <td class="actions" data-hook="admin_products_index_row_actions">

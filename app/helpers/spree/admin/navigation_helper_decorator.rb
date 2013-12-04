@@ -6,7 +6,7 @@ Spree::Admin::NavigationHelper.class_eval do
         # Return if resource is found and user is not allowed to :admin
 
         return '' if klass = klass_for(options[:label]) and cannot?(:admin, klass)
-        debugger
+
         if args.last.is_a?(Hash)
           options = options.merge(args.pop)
         end
