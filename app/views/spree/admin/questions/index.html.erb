@@ -30,6 +30,7 @@
         <% end %>
         <th><%= Spree.t(:product) %><%#= sort_link @search,:product_id, Spree.t(:name), { :default_order => "desc" }, {:title => 'admin_products_listing_name_title'} %></th>
         <th><%= Spree.t(:question) %><%#= sort_link @search, :question, Spree.t(:user),{ :default_order => "desc" }, {:title => 'admin_products_listing_user_title'}  %></th>
+        <th><%= Spree.t(:answer) %><%#= sort_link @search, :question, Spree.t(:user),{ :default_order => "desc" }, {:title => 'admin_products_listing_user_title'}  %></th>
         <th data-hook="admin_products_index_header_actions" class="actions"></th>
       </tr>
       </thead>
@@ -39,12 +40,15 @@
             <% if spree_current_user.admin? %>
                 <td class="align-center"><%= question.user.email %></td>
             <% end %>
-            <td class="align-center"><%= question.product.name %></td>
+            <td class="align-center"><%= link_to question.product.name, question.product %></td>
             <td><%= question.question  %></td>
+            <td><% if question.answer  %>
+                  <%= question.answer.answer %>
+            </td><% end %>
             <td class="actions" data-hook="admin_products_index_row_actions">
               <%= link_to_edit question, :no_text => true, :class => 'edit' if can?(:edit, question) %>
               &nbsp;
-              <%= link_to_awnser question, :no_text => true, :class => 'clone' if can?(:awnser, question) %>
+              <%= link_to_show question, :no_text => true, :class => 'clone' if can?(:show, question) %>
               &nbsp;
               <%= link_to_delete question, :no_text => true if can?(:delete, question)  %>
             </td>

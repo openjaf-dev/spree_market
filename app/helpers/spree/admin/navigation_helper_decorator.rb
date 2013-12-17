@@ -36,10 +36,9 @@ Spree::Admin::NavigationHelper.class_eval do
         content_tag('li', link, :class => css_classes.join(' '))
       end
 
-      def link_to_awnser(resource, options={})
-        # TODO aqui hay que poner el enlace a la acci'on responder del controlador de question
-        options[:data] = {:action => 'awnser'}
-        link_to_with_icon('icon-copy', Spree.t(:awnser), root_path, options)
+      def link_to_show(resource, options={})
+        options[:data] = {:action => 'show'}
+        link_to_with_icon('icon-copy', Spree.t(:answer), object_url(resource), options)
       end
 
 end

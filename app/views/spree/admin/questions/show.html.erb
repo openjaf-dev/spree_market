@@ -2,18 +2,31 @@
 
 <p>
   <strong>User:</strong>
-  <%= @spree_question.user_id %>
+  <%= @question.created_at%>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @question.user.email %>
 </p>
 
 <p>
   <strong>Product:</strong>
-  <%= @spree_question.product_id %>
+  <%= link_to @question.product.name, @question.product %>
 </p>
 
 <p>
   <strong>Question:</strong>
-  <%= @spree_question.question %>
+  <%= @question.question %>
 </p>
 
-<%= link_to 'Edit', edit_spree_question_path(@spree_question) %> |
-<%= link_to 'Back', spree_questions_path %>
+
+<div>
+  <%= form_for [@question, Spree::Answer.new], url: answer_admin_question_path do |q|  %>
+      <%= q.text_area :answer, class:"columns sixteen alpha omega" %>
+      <%= q.submit Spree.t(:ask), class:"columns alpha omega"%>
+  <% end %>
+</div>
+
+<%= link_to 'Edit', edit_admin_question_path(@question) %> |
+<%= link_to 'Back', admin_questions_path %>

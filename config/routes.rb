@@ -13,7 +13,11 @@ Spree::Core::Engine.routes.draw do
     end
 
     namespace :admin do
-      resources :questions
+      resources :questions do
+        member do
+          post :answer
+        end
+      end
       resources :products do
         collection do
           get :sell_stop

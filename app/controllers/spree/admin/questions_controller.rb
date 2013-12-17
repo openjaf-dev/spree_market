@@ -34,6 +34,7 @@ module Spree
       # GET /spree/questions/1
       # GET /spree/questions/1.json
       def show
+        @question = Question.find(params[:id])
       end
 
       # GET /spree/questions/new
@@ -88,8 +89,20 @@ module Spree
         end
       end
 
-      def awnser
-      #TODO here goes the action to awnser each question
+      def answer
+        answer = Answer.new(answer_params)
+        question = Question.find(params[:id])
+        answer.question = question
+
+        respond_to do |format|
+          if answer.save
+            format.html { redirect_to admin_questions_path(params[:product_id]), notice: 'Answer was successfully created.' }
+            format.json { render action: 'show', status: :created, location: @question }
+          else
+            format.html { redirect_to product_path(params[:product_id]), alert: 'Answer not created.'  }
+            format.json { render json: @question.errors, status: :unprocessable_entity }
+          end
+        end
       end
 
       private
@@ -102,6 +115,10 @@ module Spree
         def question_params
           params.require(:question).permit(:question)
         end
+        def answer_params
+          params.require(:answer).permit(:answer)
+        end
+
     end
   end
 end

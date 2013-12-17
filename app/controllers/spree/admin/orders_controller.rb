@@ -34,6 +34,10 @@ module Spree
           params[:q][:completed_at_lt] = params[:q].delete(:created_at_lt)
         end
 
+        #if !spree_current_user.admin?
+        #  params[:q][:user_id_eq] ||= spree_current_user.id
+        #end
+
         #Spree::LineItem.search({'product_user_id_eq' => "#{current_user.id}"})
         #Spree::Order.search({'line_items_id_true' => '1'})
 

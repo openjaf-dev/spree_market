@@ -55,9 +55,14 @@
     <h6 class="product-section-title"><%= Spree.t(:questions_anwsers) %></h6>
     <div>
       <% if !@product.questions.empty? %>
-       <ul>
+          <!--TODO improve the visualizaions of questions-->
+          <ul>
          <% @product.questions.each do |q| %>
            <li><%= q.question %></li>
+             <!--TODO improve the visualizaions of answers-->
+           <% if q.answer  %>
+             <%= Spree.t(:answer) %>: <%= q.answer.answer %>
+           <% end %>
          <% end %>
        </ul>
       <% else %>

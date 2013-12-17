@@ -56,6 +56,7 @@ module Spree
         can [:new, :create], Product
 
         can :manage, Question, user_id: user.id
+        can :manage, Answer
 
         can :manage, Variant
         can :manage, ProductProperty
