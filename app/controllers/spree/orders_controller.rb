@@ -43,19 +43,25 @@ module Spree
 
     # Shows the current incomplete order from the session
     def edit
-      @order = current_order(true)
+      #@order = current_order(true)
+      puts "las ordenes son #{session[:orders].count}, #{session[:orders].inspect} "
+      @orders = session[:orders]
       associate_user
     end
 
     # Adds a new item to the order (creating a new order if none already exists)
     def populate
+      @current_order.delete if @current_order
       populator = Spree::OrderPopulator.new(current_order(true), current_currency)
       if populator.populate(params.slice(:products, :variants, :quantity))
-        current_order.ensure_updated_shipments
+        #current_order.ensure_updated_shipments  #TODO iterate this
+
+        @orders ||= []
+        @orders << @order
 
         fire_event('spree.cart.add')
         fire_event('spree.order.contents_changed')
-        respond_with(@order) do |format|
+        respond_with(@orders) do |format|
           format.html { redirect_to cart_path }
         end
       else
