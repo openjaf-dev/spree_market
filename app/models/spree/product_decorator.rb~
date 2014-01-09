@@ -1,0 +1,7 @@
+module Spree
+  Product.class_eval do
+    has_one :activity_detail
+    belongs_to :user, class_name: 'Spree::User'
+    has_many :questions
+  end
+end
