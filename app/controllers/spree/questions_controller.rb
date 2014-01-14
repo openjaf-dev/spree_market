@@ -27,8 +27,8 @@ module Spree
 
       # GET /spree/questions/1
       # GET /spree/questions/1.json
-      def show
-      end
+      #def show
+      #end
 
       # GET /spree/questions/new
       def new
@@ -36,8 +36,8 @@ module Spree
       end
 
       # GET /spree/questions/1/edit
-      def edit
-      end
+      #def edit
+      #end
 
       # POST /spree/questions
       # POST /spree/questions.json

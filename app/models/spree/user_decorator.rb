@@ -4,7 +4,7 @@ module Spree
     has_many :products, dependent: :destroy
     has_many :questions, dependent: :destroy
 
-    before_create :set_role,
+    before_create :set_role
 
     has_attached_file :icon,
       styles: { mini:'32x32>', normal: '256x256>' },

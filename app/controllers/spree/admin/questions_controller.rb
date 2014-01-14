@@ -8,7 +8,6 @@ module Spree
       def index
 
         #Spree::Question.joins(:user).where(user_id: a.id)
-
         params[:q] ||= {}
         if !spree_current_user.admin?
           params[:q][:user_email_cont] ||= spree_current_user.email
@@ -34,12 +33,12 @@ module Spree
       # GET /spree/questions/1
       # GET /spree/questions/1.json
       def show
-        @question = Question.find(params[:id])
+        #@question = Spree::Admin::Question.find(params[:id])
       end
 
       # GET /spree/questions/new
       def new
-        @question = Question.new
+        @question = Spree::Admin::Question.new
       end
 
       # GET /spree/questions/1/edit
@@ -57,10 +56,10 @@ module Spree
         respond_to do |format|
           if @question.save
             format.html { redirect_to product_path(params[:product_id]), notice: 'Question was successfully created.' }
-            format.json { render action: 'show', status: :created, location: @question }
+            #format.json { render action: 'show', status: :created, location: @question }
           else
             format.html { redirect_to product_path(params[:product_id]), alert: 'Question not created.'  }
-            format.json { render json: @question.errors, status: :unprocessable_entity }
+            #format.json { render json: @question.errors, status: :unprocessable_entity }
           end
         end
       end
@@ -71,10 +70,10 @@ module Spree
         respond_to do |format|
           if @question.update(question_params)
             format.html { redirect_to @question, notice: 'Question was successfully updated.' }
-            format.json { head :no_content }
+            #format.json { head :no_content }
           else
             format.html { render action: 'edit' }
-            format.json { render json: @question.errors, status: :unprocessable_entity }
+            #format.json { render json: @question.errors, status: :unprocessable_entity }
           end
         end
       end
@@ -97,10 +96,10 @@ module Spree
         respond_to do |format|
           if answer.save
             format.html { redirect_to admin_questions_path(params[:product_id]), notice: 'Answer was successfully created.' }
-            format.json { render action: 'show', status: :created, location: @question }
+            #format.json { render action: 'show', status: :created, location: @question }
           else
             format.html { redirect_to product_path(params[:product_id]), alert: 'Answer not created.'  }
-            format.json { render json: @question.errors, status: :unprocessable_entity }
+            #format.json { render json: @question.errors, status: :unprocessable_entity }
           end
         end
       end

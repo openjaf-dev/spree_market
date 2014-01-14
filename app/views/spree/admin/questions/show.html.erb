@@ -22,11 +22,19 @@
 
 
 <div>
-  <%= form_for [@question, Spree::Answer.new], url: answer_admin_question_path do |q|  %>
-      <%= q.text_area :answer, class:"columns sixteen alpha omega" %>
-      <%= q.submit Spree.t(:ask), class:"columns alpha omega"%>
+  <% if @question.answer %>
+      <!--TODO aqui tengo un palo que no he podido resolver-->
+      <%= form_for [@question.answer], url: answer_admin_question_path do |q|  %>
+          <%= q.text_area :answer, class:"columns sixteen alpha omega" %>
+          <%= q.submit Spree.t(:answer), class:"columns alpha omega"%>
+      <% end %>
+  <% else %>
+      <%= form_for [@question, Spree::Answer.new], url: answer_admin_question_path do |q|  %>
+          <%= q.text_area :answer, class:"columns sixteen alpha omega" %>
+          <%= q.submit Spree.t(:answer), class:"columns alpha omega"%>
+      <% end %>
   <% end %>
 </div>
 
-<%= link_to 'Edit', edit_admin_question_path(@question) %> |
+<%#= link_to 'Edit', edit_admin_question_path(@question) %> |
 <%= link_to 'Back', admin_questions_path %>

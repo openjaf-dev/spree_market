@@ -1,10 +1,10 @@
-<%= form_for(@spree_question) do |f| %>
-  <% if @spree_question.errors.any? %>
+<%= form_for(@question, url: admin_questions_path(@question)) do |f| %>
+  <% if @question.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@spree_question.errors.count, "error") %> prohibited this spree_question from being saved:</h2>
+      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this spree_question from being saved:</h2>
 
       <ul>
-      <% @spree_question.errors.full_messages.each do |msg| %>
+      <% @question.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
+    <%= @question.user.email %>
   </div>
   <div class="field">
     <%= f.label :product_id %><br>
-    <%= f.number_field :product_id %>
+    <%= @question.product.name %>
   </div>
   <div class="field">
     <%= f.label :question %><br>
