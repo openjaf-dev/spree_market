@@ -18,6 +18,11 @@ module Spree
 
   private
 
+    def user_params
+      params.require(:user).permit(:email, :password, :password_confirmation,
+                                   :title, :first_name, :last_name, :phone, :icon)
+    end
+
     def load_object
       if params[:id]
         @user = Spree::User.find(params[:id])

@@ -1,0 +1,53 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:user_account) %>
+<% end %>
+
+<table>
+  <tr data-hook="email">
+    <th><%= Spree.t(:email) %></th>
+    <td>
+      <%= @user.email %>
+    </td>
+  </tr>
+  <tr data-hook="roles">
+    <th><%= Spree.t(:roles) %></th>
+    <td>
+      <%= @user.spree_roles.pluck(:name).join(', ') %>
+    </td>
+  </tr>
+  <tr data-hook="title">
+    <th><%= Spree.t(:title) %></th>
+    <td>
+      <%= @user.title %>
+    </td>
+  </tr>
+  <tr data-hook="name">
+    <th><%= Spree.t(:first_name) %></th>
+    <td>
+      <%= @user.first_name %>
+    </td>
+  </tr>
+  <tr data-hook="last_name">
+    <th><%= Spree.t(:last_name) %></th>
+    <td>
+      <%= @user.last_name %>
+    </td>
+  </tr>
+  <tr data-hook="phone">
+    <th><%= Spree.t(:phone) %></th>
+    <td>
+      <%= @user.phone %>
+    </td>
+  </tr>
+  <tr data-hook="icon">
+    <th><%= Spree.t(:icon) %></th>
+    <td>
+      <%= image_tag @user.icon %>
+    </td>
+  </tr>
+</table>
+
+<p>
+  <%= link_to_edit @user, :class => 'edit_user' %> <%= Spree.t(:or) %>
+  <%= link_to Spree.t(:back), collection_url %>
+</p>

@@ -2,12 +2,23 @@
 
 <div data-hook="account_summary" class="account-summary">
   <dl id="user-info" class="columns seven omega alpha">
-    <dt><%= Spree.t(:email) %></dt>
-    <dd>
-      <%= @user.email %>
+    <dt>
+      <%= Spree.t(:user) %>
       <% if spree_current_user  %>
-        (<%= link_to Spree.t(:edit), spree.edit_account_path %>)
+          (<%= link_to Spree.t(:edit), spree.edit_account_path %>)
       <% end %>
+    </dt>
+    <dd>
+      <%= image_tag @user.icon %>
+    </dd>
+    <dd>
+      <%= Spree.t(:email) %>:<%= @user.email %>
+    </dd>
+    <dd>
+      <%= Spree.t(:name) %>: <%= @user.title %> <%= @user.first_name %> <%= @user.last_name %>
+    </dd>
+    <dd>
+      <%= Spree.t(:phone) %>: <%= @user.phone %>
     </dd>
   </dl>
   <dl id="user-info" class="columns eight">

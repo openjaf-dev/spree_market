@@ -1,0 +1,43 @@
+<p>
+  <%= f.label :email, Spree.t(:email) %><br />
+  <%= f.email_field :email, :class => 'title' %>
+</p>
+<div id="password-credentials">
+  <p>
+    <%= f.label :password, Spree.t(:password) %><br />
+    <%= f.password_field :password, :class => 'title' %>
+  </p>
+
+  <p>
+    <%= f.label :password_confirmation, Spree.t(:confirm_password) %><br />
+    <%= f.password_field :password_confirmation, :class => 'title' %>
+  </p>
+
+  <p>
+    <%= f.label :title, Spree.t(:title) %><br />
+    <%= f.text_field :title, :class => 'title' %>
+  </p>
+
+  <p>
+    <%= f.label :first_name, Spree.t(:first_name) %><br />
+    <%= f.text_field :first_name, :class => 'title' %>
+  </p>
+
+  <p>
+    <%= f.label :last_name, Spree.t(:last_name) %><br />
+    <%= f.text_field :last_name, :class => 'title' %>
+  </p>
+
+  <p>
+    <%= f.label :phone, Spree.t(:phone) %><br />
+    <%= f.text_field :phone, :class => 'title' %>
+  </p>
+
+  <p>
+    <%= f.label :filename, Spree.t(:filename) %><br />
+    <%= f.file_field :icon, :class => 'title' %>
+  </p>
+
+</div>
+
+<div data-hook="signup_below_password_fields"></div>
